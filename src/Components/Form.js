@@ -1,27 +1,23 @@
 import React from 'react'
 import Styled from 'styled-components'
-import { useState } from 'react';
 export default function Form(props) {
-    const [showPass, setShowPass] = useState(false);
     let btnStyle = {
         backgroundColor: "green",
         color: "white",
     };
     let btnClasses = ['btn', 'mt-2', 'm-1']
     let btnText, passcodeType;
-    const showPassHandler = () => {
-        if (showPass === false) {
-            btnText = "Show Password";
-            passcodeType = "password";
-            btnClasses.push('btn-success')
-        } else {
-            btnStyle.backgroundColor = 'red';
-            btnText = "Hide Password";
-            passcodeType = "text";
-            btnClasses.push('btn-danger')
-            setShowPass(false);
-        }
-    };
+    if (props.showPass === false) {
+        btnStyle.backgroundColor = 'red';
+        btnText = "Hide Password";
+        passcodeType = "text";
+        btnClasses.push('btn-danger')
+    } else {
+        btnText = "Show Password";
+        passcodeType = "password";
+        btnClasses.push('btn-success')
+    }
+
     const StyledButton = Styled.button`
     display: ${(props) => (props.flag ? 'inline-block' : 'block')};
     padding: 5px 10px;
@@ -58,7 +54,7 @@ export default function Form(props) {
                     <input type={passcodeType} id='password' required className='form-control' />
                 </div>
                 <button className='btn btn-primary mt-2 m-1' type='button' onClick={props.submit}>Register</button>
-                <button type='button' className={btnClasses.join(' ')} style={btnStyle} onClick={showPassHandler}>{btnText}</button>
+                <button type='button' className={btnClasses.join(' ')} style={btnStyle} onClick={props.showPassToggle}>{btnText}</button>
                 <br />
                 <StyledButton type='button' bgcolor='green' flag='1'>New Button</StyledButton>
                 <StyledButton type='button' bgcolor='blue' flag='1'>New Button</StyledButton>

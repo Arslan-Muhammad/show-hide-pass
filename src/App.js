@@ -11,10 +11,11 @@ class App extends Component {
       isRegistered: false,
       name: null,
       email: null,
+      showPass: false,
     }
   };
   formHandler = (event) => {
-    event.preventDefault();
+    console.log(event.target);
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -22,7 +23,6 @@ class App extends Component {
   };
 
   showPasswordHandler = (event) => {
-    event.preventDefault();
     this.setState({ showPass: !this.state.showPass });
   };
 
@@ -37,6 +37,8 @@ class App extends Component {
     else {
       return (<div>
         <Form submit={this.formHandler}
+        showPassToggle={this.showPasswordHandler}
+        showPass={this.showPass}
         >
         </Form>
       </div>)
