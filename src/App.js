@@ -9,39 +9,55 @@ class App extends Component {
 
     this.state = {
       isRegistered: false,
-      name: null,
-      email: null,
+      name: "",
+      email: "",
+      password: "",
       showPass: false,
     }
   };
-  formHandler = (event) => {
-    console.log(event.target);
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    this.setState({ name, email, password, isRegistered: true });
+
+  nameHandler = (e) => {
+    const name = e.target.name;
+    console.log(name, "name");
+    this.setState({ name: name });
+  };
+  emailHandler = (e) => {
+    const email = e.target.value;
+    this.setState({ email: email });
+  };
+  passwordHandler = (e) => {
+    const password = e.target.value;
+    this.setState({ password: password });
+  }
+  formHandler = () => {
+    this.setState({ isRegistered: true });
   };
 
-  showPasswordHandler = (event) => {
+  showPasswordHandler = () => {
     this.setState({ showPass: !this.state.showPass });
   };
 
   render() {
     if (this.state.isRegistered) {
       return (
-        <div>
-          <Greet name={this.state.name} email={this.state.email}> </Greet>
-        </div>
+        <Greet name={this.state.name} email={this.state.email}> </Greet>
       )
     }
     else {
-      return (<div>
-        <Form submit={this.formHandler}
-        showPassToggle={this.showPasswordHandler}
-        showPass={this.showPass}
+      return (
+        <Form
+          submit={this.formHandler}
+          name={this.nameHandler}
+          email={this.emailHandler}
+          password={this.passwordHandler}
+          showPassToggle={this.showPasswordHandler}
+          nameValue={this.state.name}
+          emailValue={this.state.email}
+          passwordValue={this.state.password}
+          showPass={this.state.showPass}
         >
         </Form>
-      </div>)
+      )
     }
   }
 }

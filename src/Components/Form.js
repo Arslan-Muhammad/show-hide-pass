@@ -7,7 +7,7 @@ export default function Form(props) {
     };
     let btnClasses = ['btn', 'mt-2', 'm-1']
     let btnText, passcodeType;
-    if (props.showPass === false) {
+    if (props.showPass === true) {
         btnStyle.backgroundColor = 'red';
         btnText = "Hide Password";
         passcodeType = "text";
@@ -43,15 +43,15 @@ export default function Form(props) {
             <form>
                 <div className='form-group'>
                     <label htmlFor='name'>Name:</label>
-                    <input type='text' id='name' required className='form-control' />
+                    <input type='text' value={props.nameValue} id='name' required className='form-control' onChange={props.name} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='email'>email:</label>
-                    <input type='email' id='email' required className='form-control' />
+                    <input type='email' value={props.emailValue} id='email' required className='form-control' onChange={props.email} />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='password'>Password:</label>
-                    <input type={passcodeType} id='password' required className='form-control' />
+                    <input type={passcodeType} value={props.passwordValue} id='password' required className='form-control' autoComplete='true' onChange={props.password} />
                 </div>
                 <button className='btn btn-primary mt-2 m-1' type='button' onClick={props.submit}>Register</button>
                 <button type='button' className={btnClasses.join(' ')} style={btnStyle} onClick={props.showPassToggle}>{btnText}</button>
