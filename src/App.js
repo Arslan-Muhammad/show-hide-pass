@@ -9,13 +9,14 @@ class App extends Component {
 
     this.state = {
       isRegistered: false,
-      name: null,
-      email: null,
+      name: "",
+      email: "",
+      password: "",
       showPass: false,
     }
   };
   formHandler = (event) => {
-    console.log(event.target);
+    event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -37,7 +38,13 @@ class App extends Component {
     else {
       return (<div>
         <Form submit={this.formHandler}
+        name={this.state.name}
+        setName={(e) => this.setState({name: e.target.value})}
+        email={this.state.email}
+        setEmail={(e) => this.setState({email: e.target.value})}
         showPassToggle={this.showPasswordHandler}
+        password= {this.state.password}
+        setPassword ={(e) => this.setState({password: e.target.value})}
         showPass={this.state.showPass}
         >
         </Form>
