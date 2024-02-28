@@ -15,49 +15,40 @@ class App extends Component {
       showPass: false,
     }
   };
-
-  nameHandler = (e) => {
-    const name = e.target.name;
-    console.log(name, "name");
-    this.setState({ name: name });
-  };
-  emailHandler = (e) => {
-    const email = e.target.value;
-    this.setState({ email: email });
-  };
-  passwordHandler = (e) => {
-    const password = e.target.value;
-    this.setState({ password: password });
-  }
-  formHandler = () => {
-    this.setState({ isRegistered: true });
+  formHandler = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    this.setState({ name, email, password, isRegistered: true });
   };
 
-  showPasswordHandler = () => {
+  showPasswordHandler = (event) => {
     this.setState({ showPass: !this.state.showPass });
   };
 
   render() {
     if (this.state.isRegistered) {
       return (
-        <Greet name={this.state.name} email={this.state.email}> </Greet>
+        <div>
+          <Greet name={this.state.name} email={this.state.email}> </Greet>
+        </div>
       )
     }
     else {
-      return (
-        <Form
-          submit={this.formHandler}
-          name={this.nameHandler}
-          email={this.emailHandler}
-          password={this.passwordHandler}
-          showPassToggle={this.showPasswordHandler}
-          nameValue={this.state.name}
-          emailValue={this.state.email}
-          passwordValue={this.state.password}
-          showPass={this.state.showPass}
+      return (<div>
+        <Form submit={this.formHandler}
+        name={this.state.name}
+        setName={(e) => this.setState({name: e.target.value})}
+        email={this.state.email}
+        setEmail={(e) => this.setState({email: e.target.value})}
+        showPassToggle={this.showPasswordHandler}
+        password= {this.state.password}
+        setPassword ={(e) => this.setState({password: e.target.value})}
+        showPass={this.state.showPass}
         >
         </Form>
-      )
+      </div>)
     }
   }
 }
