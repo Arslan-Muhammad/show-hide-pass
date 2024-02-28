@@ -3,5 +3,6 @@
 - React js 
 - Styled Components
 - Java Script
+- Bootstrap
 - CSS
 - HTML
