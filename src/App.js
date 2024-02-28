@@ -38,7 +38,7 @@ class App extends Component {
       return (<div>
         <Form submit={this.formHandler}
         showPassToggle={this.showPasswordHandler}
-        showPass={this.showPass}
+        showPass={this.state.showPass}
         >
         </Form>
       </div>)
